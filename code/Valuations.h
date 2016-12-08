@@ -8,6 +8,13 @@
 #include "BooleanLattice.h"
 #include "DNest4/code/RNG.h"
 
+/*
+    Valuations to go along with statements in a lattice.
+    They are represented as vectors of doubles --- there is no need for
+    a class for this. But here are some functions for generating and
+    testing valuations.
+*/
+
 namespace NF
 {
 
