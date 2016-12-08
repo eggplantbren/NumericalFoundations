@@ -45,6 +45,9 @@ class BooleanLattice
         // Does element i imply element j?
         bool implies(size_t i, size_t j) const;
 
+        // Check whether statements (i, j, k) are disjoint
+        bool disjoint(size_t i, size_t j, size_t k) const;
+
         // Printable representation (bits!) of a statement 
         std::string statement_to_string(size_t i) const;
 

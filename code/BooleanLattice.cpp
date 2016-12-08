@@ -40,6 +40,15 @@ bool BooleanLattice::implies(size_t i, size_t j) const
     return (i & (~j)) == 0;
 }
 
+bool BooleanLattice::disjoint(size_t i, size_t j, size_t k) const
+{
+    if(i >= statements.size()
+        || j >= statements.size()
+        || k >= statements.size())
+            throw std::domain_error("Out of bounds.");
+    return (meet(i, j) == 0) && (meet(i, k) == 0) && (meet(j, k) == 0);
+}
+
 std::string BooleanLattice::statement_to_string(size_t i) const
 {
     if(i >= statements.size())

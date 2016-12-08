@@ -17,14 +17,15 @@ int main()
 
     // Some valuations
     std::vector<double> v =
-        NumericalFoundations2::generate_faithful_valuations(bl, rng);
+        NumericalFoundations2::generate_good_valuations(bl, rng);
 
     // Put into a tuple
     std::tuple<NumericalFoundations2::BooleanLattice, std::vector<double>>
                 blv(bl, v);
 
-    std::cout<<"A boolean lattice and some faithful valuations:"<<std::endl;
+    std::cout<<"A boolean lattice and some good valuations:"<<std::endl;
     std::cout<<blv<<std::endl;
+    NumericalFoundations2::check_order(bl, v);
 
     return 0;
 }

@@ -17,11 +17,15 @@ std::vector<double> generate_valuations
         (const BooleanLattice& bl, DNest4::RNG& rng);
 
 // Generate some valuations until we find some faithful ones.
-std::vector<double> generate_faithful_valuations
-        (const BooleanLattice& bl, DNest4::RNG& rng);
+std::vector<double> generate_good_valuations
+    (const BooleanLattice& bl, DNest4::RNG& rng, bool fidelity_matters=true);
 
 // Check fidelity of the valuations.
 bool check_fidelity
+        (const BooleanLattice& bl, const std::vector<double>& valuations);
+
+// Check order of the valuations.
+bool check_order
         (const BooleanLattice& bl, const std::vector<double>& valuations);
 
 // Output a boolean lattice with valuations.

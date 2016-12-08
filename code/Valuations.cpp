@@ -1,5 +1,8 @@
 #include "Valuations.h"
 
+
+#include <iostream>
+
 namespace NumericalFoundations2
 {
 
@@ -14,17 +17,20 @@ std::vector<double> generate_valuations
     return v;
 }
 
-std::vector<double> generate_faithful_valuations
-                            (const BooleanLattice& bl, DNest4::RNG& rng)
+std::vector<double> generate_good_valuations
+            (const BooleanLattice& bl, DNest4::RNG& rng, bool fidelity_matters)
 {
     std::vector<double> v;
 
-    // Generate valuations until they're faithful
+    // Generate valuations until they satisfy order (and optionally, fidelity)
     while(true)
     {
         v = generate_valuations(bl, rng);
-        if(check_fidelity(bl, v))
-            break;
+        if(check_order(bl, v))
+        {
+            if((!fidelity_matters) || check_fidelity(bl, v))
+                break;
+        }
     }
 
     return v;
@@ -45,6 +51,24 @@ bool check_fidelity
     }
     return true;
 }
+
+bool check_order
+        (const BooleanLattice& bl, const std::vector<double>& valuations)
+{
+    // Alias
+    const auto& v = valuations;
+
+    // Loop over all triples, but only bother with disjoint triples
+    for(size_t i=0; i<bl.size(); ++i)
+        for(size_t j=0; j<bl.size(); ++j)
+            for(size_t k=0; k<bl.size(); ++k)
+                if(bl.disjoint(i, j, k))
+                    if(v[i] > v[j])
+                        if(v[bl.join(i, k)] <= v[bl.join(j, k)])
+                            return false;
+    return true;
+}
+
 
 // Output a boolean lattice with valuations.
 std::ostream& operator << 
