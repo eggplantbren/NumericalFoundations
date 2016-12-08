@@ -1,5 +1,5 @@
-#ifndef NumericalFoundations2_Valuations
-#define NumericalFoundations2_Valuations
+#ifndef NF_Valuations
+#define NF_Valuations
 
 #include <vector>
 #include <ostream>
@@ -8,7 +8,7 @@
 #include "BooleanLattice.h"
 #include "DNest4/code/RNG.h"
 
-namespace NumericalFoundations2
+namespace NF
 {
 
 // Generate some valuations to go along with a lattice.
@@ -33,7 +33,7 @@ std::ostream& operator <<
         (std::ostream& out,
             const std::tuple<BooleanLattice, std::vector<double>>& blv);
 
-} // namespace NumericalFoundations2
+} // namespace NF
 
 #endif
 

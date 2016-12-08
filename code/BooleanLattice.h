@@ -1,12 +1,12 @@
-#ifndef NumericalFoundations2_BooleanLattice
-#define NumericalFoundations2_BooleanLattice
+#ifndef NF_BooleanLattice
+#define NF_BooleanLattice
 
 #include <stdlib.h>
 #include <vector>
 #include <string>
 #include <ostream>
 
-namespace NumericalFoundations2
+namespace NF
 {
 
 /*
@@ -58,7 +58,7 @@ class BooleanLattice
 
 std::ostream& operator << (std::ostream& out, const BooleanLattice& bl);
 
-} // namespace NumericalFoundations2
+} // namespace NF
 
 #endif
 

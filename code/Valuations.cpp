@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace NumericalFoundations2
+namespace NF
 {
 
 std::vector<double> generate_valuations
@@ -89,5 +89,5 @@ std::ostream& operator <<
     return out;
 }
 
-} // namespace NumericalFoundations2
+} // namespace NF
 

@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace NumericalFoundations2
+namespace NF
 {
 
 BooleanLattice::BooleanLattice(std::string name, size_t num_atoms)
@@ -73,5 +73,5 @@ std::ostream& operator << (std::ostream& out, const BooleanLattice& bl)
     return out;
 }
 
-} // namespace NumericalFoundations2
+} // namespace NF
 
