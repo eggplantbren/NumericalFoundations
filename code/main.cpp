@@ -1,13 +1,30 @@
 #include <iostream>
+#include <tuple>
+#include <chrono>
+#include <ctime>
+#include "DNest4/code/RNG.h"
+
 #include "BooleanLattice.h"
+#include "Valuations.h"
 
 int main()
 {
-    std::cout<<"Welcome to NumericalFoundations 2"<<std::endl;
-    std::cout<<"Here is a Boolean lattice: \n"<<std::endl;
+    // A random number generator
+    DNest4::RNG rng(time(0));
 
-    NumericalFoundations2::BooleanLattice bl("A", 3);
-    std::cout<<bl<<std::endl;
+    // A boolean lattice
+    NumericalFoundations2::BooleanLattice bl("A", 2);
+
+    // Some valuations
+    std::vector<double> v =
+        NumericalFoundations2::generate_faithful_valuations(bl, rng);
+
+    // Put into a tuple
+    std::tuple<NumericalFoundations2::BooleanLattice, std::vector<double>>
+                blv(bl, v);
+
+    std::cout<<"A boolean lattice and some faithful valuations:"<<std::endl;
+    std::cout<<blv<<std::endl;
 
     return 0;
 }

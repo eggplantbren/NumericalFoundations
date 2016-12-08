@@ -32,6 +32,10 @@ class BooleanLattice
         // Constructor: specify number of atoms
         BooleanLattice(std::string name, size_t num_atoms);
 
+        // Returns the size
+        size_t size() const
+        { return statements.size(); }
+
         // Join of two elements
         size_t join(size_t i, size_t j) const;
 
