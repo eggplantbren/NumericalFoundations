@@ -1,6 +1,7 @@
 #include "MonotonicFunction.h"
 
 #include "DNest4/code/Distributions/Laplace.h"
+#include "DNest4/code/Utils.h"
 
 namespace NF
 {
@@ -18,6 +19,24 @@ void MonotonicFunction::from_prior(DNest4::RNG& rng)
         uu = rng.rand();
 
     assemble();
+}
+
+double MonotonicFunction::perturb(DNest4::RNG& rng)
+{
+    int reps = 1;
+    if(rng.rand() <= 0.5)
+        reps += static_cast<int>(pow(10.0, 2*rng.rand()));
+
+    int which;
+    for(int i=0; i<reps; ++i)
+    {
+        which = rng.rand_int(u.size());
+        u[which] += rng.randh();
+        DNest4::wrap(u[which], 0.0, 1.0);
+    }
+
+    assemble();
+    return 0.0;
 }
 
 void MonotonicFunction::assemble()
