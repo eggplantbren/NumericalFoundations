@@ -5,6 +5,7 @@
 #include "DNest4/code/RNG.h"
 
 #include "BooleanLattice.h"
+#include "MonotonicFunction.h"
 #include "Valuations.h"
 
 int main()
@@ -26,6 +27,10 @@ int main()
     std::cout<<"A boolean lattice and some good valuations:"<<std::endl;
     std::cout<<blv<<std::endl;
     NF::check_order(bl, v);
+
+    NF::MonotonicFunction mf(8);
+    mf.from_prior(rng);
+    std::cout<<mf<<std::endl;
 
     return 0;
 }

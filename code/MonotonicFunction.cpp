@@ -29,5 +29,12 @@ void MonotonicFunction::assemble()
         f[i] = f[i-1] - 1000*log(1.0 - u[i]);
 }
 
+std::ostream& operator << (std::ostream& out, const MonotonicFunction& mf)
+{
+    for(double ff: mf.f)
+        out<<ff<<' ';
+    return out;
+}
+
 } // namespace NF
 
