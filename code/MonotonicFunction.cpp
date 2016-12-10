@@ -15,10 +15,18 @@ MonotonicFunction::MonotonicFunction(size_t num_values)
 
 void MonotonicFunction::from_prior(DNest4::RNG& rng)
 {
-    for(double& uu: u)
-        uu = rng.rand();
+    do
+    {
+        for(double& uu: u)
+            uu = rng.rand();
 
-    assemble();
+        assemble();
+    }while(is_degenerate());
+}
+
+bool MonotonicFunction::is_degenerate() const
+{
+    return (f[f.size()-1] - f[0]) <= 0.01;
 }
 
 double MonotonicFunction::perturb(DNest4::RNG& rng)
@@ -36,6 +44,10 @@ double MonotonicFunction::perturb(DNest4::RNG& rng)
     }
 
     assemble();
+
+    if(is_degenerate())
+        return -1E300;
+
     return 0.0;
 }
 

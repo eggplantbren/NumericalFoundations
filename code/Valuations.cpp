@@ -69,6 +69,12 @@ bool check_order
     return true;
 }
 
+bool check_sum_rule
+        (const BooleanLattice& bl, const std::vector<double>& valuations)
+{
+    return true;
+}
+
 
 // Output a boolean lattice with valuations.
 std::ostream& operator << 

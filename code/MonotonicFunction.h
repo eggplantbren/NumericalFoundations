@@ -21,6 +21,9 @@ class MonotonicFunction
         // Compute f from u
         void assemble();
 
+        // Check whether the f values are too close together
+        bool is_degenerate() const;
+
     public:
         MonotonicFunction(size_t num_values);
 

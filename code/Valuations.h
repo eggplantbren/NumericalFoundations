@@ -35,6 +35,10 @@ bool check_fidelity
 bool check_order
         (const BooleanLattice& bl, const std::vector<double>& valuations);
 
+// Check "transformability to sum rule"
+bool check_sum_rule
+        (const BooleanLattice& bl, const std::vector<double>& valuations);
+
 // Output a boolean lattice with valuations.
 std::ostream& operator << 
         (std::ostream& out,
