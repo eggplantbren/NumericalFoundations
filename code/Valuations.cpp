@@ -8,7 +8,7 @@ Valuations::Valuations()
 
 }
 
-void Valuations::generate(size_t size, DNest4::RNG& rng)
+void Valuations::generate(size_t size, RNG& rng)
 {
     // Generate a vector
     std::vector<double> x(size);

@@ -6,7 +6,7 @@
 #include <vector>
 #include <ostream>
 
-#include "DNest4/code/RNG.h"
+#include "RNG.h"
 
 /*
 * A class for sets of values.
@@ -26,7 +26,7 @@ class Valuations
         Valuations();
 
         // Generate some values
-        void generate(size_t size, DNest4::RNG& rng);
+        void generate(size_t size, RNG& rng);
 
         // Convert to a vector and return.
         std::vector<double> as_vector() const;
