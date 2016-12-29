@@ -26,9 +26,10 @@ std::vector<double> generate_good_valuations
     while(true)
     {
         v = generate_valuations(bl, rng);
-        if(check_order(bl, v))
+        BLV blv(bl, v);
+        if(check_order(blv))
         {
-            if((!fidelity_matters) || check_fidelity(bl, v))
+            if((!fidelity_matters) || check_fidelity(blv))
                 break;
         }
     }
@@ -36,9 +37,12 @@ std::vector<double> generate_good_valuations
     return v;
 }
 
-bool check_fidelity
-        (const BooleanLattice& bl, const std::vector<double>& valuations)
+bool check_fidelity(const BLV& blv)
 {
+    // Unpack tuple
+    auto& bl = std::get<0>(blv);
+    auto& valuations = std::get<1>(blv);
+
     // Loop over all pairs of statements
     for(size_t i=0; i<bl.size(); ++i)
     {
@@ -52,11 +56,11 @@ bool check_fidelity
     return true;
 }
 
-bool check_order
-        (const BooleanLattice& bl, const std::vector<double>& valuations)
+bool check_order(const BLV& blv)
 {
-    // Alias
-    const auto& v = valuations;
+    // Unpack tuple
+    auto& bl = std::get<0>(blv);
+    auto& v  = std::get<1>(blv);
 
     // Loop over all triples, but only bother with disjoint triples
     for(size_t i=0; i<bl.size(); ++i)
@@ -69,17 +73,14 @@ bool check_order
     return true;
 }
 
-bool check_sum_rule
-        (const BooleanLattice& bl, const std::vector<double>& valuations)
+bool check_sum_rule(const BLV& blv)
 {
     return true;
 }
 
 
 // Output a boolean lattice with valuations.
-std::ostream& operator << 
-        (std::ostream& out,
-            const std::tuple<BooleanLattice, std::vector<double>>& blv)
+std::ostream& operator << (std::ostream& out, const BLV& blv)
 {
     // Unpack tuple
     auto& bl = std::get<0>(blv);
