@@ -11,8 +11,20 @@ std::vector<double> generate_valuations
 {
     std::vector<double> v(bl.size());
 
+    // Generate some values
     for(size_t i=0; i<v.size(); ++i)
         v[i] = 1000.0*rng.randn();
+
+    // Possiblility of duplicate values
+    if(rng.rand() < 0.5)
+    {
+        double copy_prob = pow(10.0, -6*rng.rand());
+        for(size_t i=0; i<v.size(); ++i)
+        {
+            if(rng.rand() < copy_prob)
+                v[i] = v[rng.rand_int(v.size())];
+        }
+    }
 
     return v;
 }
