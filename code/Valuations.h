@@ -1,47 +1,43 @@
 #ifndef NF_Valuations
 #define NF_Valuations
 
+#include <set>
+#include <stdlib.h>
 #include <vector>
 #include <ostream>
-#include <tuple>
 
-#include "BooleanLattice.h"
 #include "DNest4/code/RNG.h"
 
 /*
-    Valuations to go along with statements in a lattice.
-    They are represented as vectors of doubles --- a class is overkill for
-    this. But here are some functions for generating and
-    testing valuations.
+* A class for sets of values.
 */
 
 namespace NF
 {
 
-// A type for Boolean lattices with valuations.
-typedef std::tuple<BooleanLattice, std::vector<double>> BLV;
+class Valuations
+{
+    private:
+        // The actual values, sorted.
+        std::multiset<double> v;
 
-// Generate some valuations to go along with a lattice.
-// NB: Does not duplicate values!
-std::vector<double> generate_valuations
-        (const BooleanLattice& bl, DNest4::RNG& rng);
+    public:
+        // A do-nothing constructor.
+        Valuations();
 
-// Generate some valuations until we find some that satisfy order and
-// (optionally) fidelity.
-std::vector<double> generate_good_valuations
-    (const BooleanLattice& bl, DNest4::RNG& rng, bool fidelity_matters=true);
+        // Generate some values
+        void generate(size_t size, DNest4::RNG& rng);
 
-// Check fidelity of the valuations.
-bool check_fidelity(const BLV& lattice);
+        // Convert to a vector and return.
+        std::vector<double> as_vector() const;
 
-// Check order of the valuations.
-bool check_order(const BLV& lattice);
+        // Make output a friend
+        friend std::ostream& operator <<
+                            (std::ostream& out, const Valuations& v);
+};
 
-// Check "transformability to sum rule"
-bool check_sum_rule(const BLV& blv);
-
-// Output a boolean lattice with valuations.
-std::ostream& operator << (std::ostream& out, const BLV& blv);
+// Output to stream
+std::ostream& operator << (std::ostream& out, const Valuations& v);
 
 } // namespace NF
 
