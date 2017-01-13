@@ -38,7 +38,7 @@ bool check_fidelity(const BLV& lattice);
 bool check_order(const BLV& lattice);
 
 // Check "transformability to sum rule"
-bool check_sum_rule(const BLV& blv);
+bool check_sum_rule(const BLV& blv, DNest4::RNG& rng);
 
 // Output a boolean lattice with valuations.
 std::ostream& operator << (std::ostream& out, const BLV& blv);

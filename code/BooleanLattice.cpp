@@ -67,7 +67,9 @@ std::string BooleanLattice::statement_to_string(size_t i) const
 
 std::ostream& operator << (std::ostream& out, const BooleanLattice& bl)
 {
-    out<<bl.name<<' ';
+    out<<"Boolean lattice name: ";
+    out<<bl.name<<'\n';
+    out<<"Statements: ";
     for(size_t i=0; i<bl.statements.size(); ++i)
         out<<bl.statement_to_string(i)<<' ';
     return out;

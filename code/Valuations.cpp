@@ -1,7 +1,7 @@
 #include "Valuations.h"
 
-
 #include <iostream>
+#include "MonotonicFunction.h"
 
 namespace NF
 {
@@ -85,11 +85,19 @@ bool check_order(const BLV& blv)
     return true;
 }
 
-bool check_sum_rule(const BLV& blv)
+bool check_sum_rule(const BLV& blv, DNest4::RNG& rng)
 {
-    return true;
-}
+    // Unpack tuple
+    auto& bl = std::get<0>(blv);
+    auto& v  = std::get<1>(blv);
 
+    // Create a monotonic function which will hopefully transform things
+    // into a sum-rule form.
+    MonotonicFunction monotonic_function(v.size());
+    monotonic_function.from_prior(rng);
+
+    
+}
 
 // Output a boolean lattice with valuations.
 std::ostream& operator << (std::ostream& out, const BLV& blv)
@@ -99,9 +107,10 @@ std::ostream& operator << (std::ostream& out, const BLV& blv)
     auto& valuations = std::get<1>(blv);
 
     // Output the lattice
-    out<<bl;
+    out<<bl<<'\n';
 
     // Output the values
+    out<<"Valuations: ";
     for(double v: valuations)
         out<<v<<' ';
 

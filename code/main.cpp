@@ -22,9 +22,11 @@ int main()
     // Put into a tuple
     NF::BLV blv(bl, v);
 
-    std::cout<<"A boolean lattice and some good valuations:"<<std::endl;
+    // Print it
     std::cout<<blv<<std::endl;
-    NF::check_order(blv);
+
+    // See if the sum rule applies.
+    NF::check_sum_rule(blv, rng);
 
     return 0;
 }
