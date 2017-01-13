@@ -96,7 +96,7 @@ bool check_sum_rule(const BLV& blv, DNest4::RNG& rng)
     MonotonicFunction monotonic_function(v.size());
     monotonic_function.from_prior(rng);
 
-    
+    // 
 }
 
 // Output a boolean lattice with valuations.

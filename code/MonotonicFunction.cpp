@@ -51,6 +51,28 @@ double MonotonicFunction::perturb(DNest4::RNG& rng)
     return 0.0;
 }
 
+std::vector<double> MonotonicFunction::apply(const std::vector<double>& v) const
+{
+    // Calculate the rank of each element of v
+    std::vector<int> ranks(v.size());
+    for(size_t i=0; i<v.size(); ++i)
+    {
+        ranks[i] = 0;   // Count how many elements are beaten by element i
+        for(size_t j=0; j<v.size(); ++j)
+        {
+            if(v[i] > v[j])
+                ++ranks[i];
+        }
+    }
+
+    // Construct result vector
+    std::vector<double> result(v.size());
+    for(size_t i=0; i<v.size(); ++i)
+        result[i] = f[ranks[i]];
+
+    return result;
+}
+
 void MonotonicFunction::assemble()
 {
     DNest4::Laplace laplace;

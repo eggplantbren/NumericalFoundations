@@ -30,6 +30,9 @@ class MonotonicFunction
         void from_prior(DNest4::RNG& rng);
         double perturb(DNest4::RNG& rng);
 
+        // Apply to some valuations.
+        std::vector<double> apply(const std::vector<double>& v) const;
+
         // Output
         friend std::ostream& operator << (std::ostream& out,
                                     const MonotonicFunction& mf);
