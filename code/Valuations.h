@@ -6,6 +6,7 @@
 #include <tuple>
 
 #include "BooleanLattice.h"
+#include "MonotonicFunction.h"
 #include "DNest4/code/RNG.h"
 
 /*
@@ -39,6 +40,10 @@ bool check_order(const BLV& lattice);
 
 // Check "transformability to sum rule"
 bool check_sum_rule(const BLV& blv, DNest4::RNG& rng);
+
+// Calculate the badness of a BLV and a monotonic function
+// (i.e., how badly is the sum rule violated?)
+double badness(const BLV& blv, const MonotonicFunction& mf);
 
 // Output a boolean lattice with valuations.
 std::ostream& operator << (std::ostream& out, const BLV& blv);

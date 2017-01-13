@@ -53,6 +53,9 @@ double MonotonicFunction::perturb(DNest4::RNG& rng)
 
 std::vector<double> MonotonicFunction::apply(const std::vector<double>& v) const
 {
+    if(v.size() != f.size())
+        throw std::logic_error("Error in MonotonicFunction::apply.");
+
     // Calculate the rank of each element of v
     std::vector<int> ranks(v.size());
     for(size_t i=0; i<v.size(); ++i)

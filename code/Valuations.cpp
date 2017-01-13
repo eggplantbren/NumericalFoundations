@@ -96,7 +96,31 @@ bool check_sum_rule(const BLV& blv, DNest4::RNG& rng)
     MonotonicFunction monotonic_function(v.size());
     monotonic_function.from_prior(rng);
 
-    // 
+    // Calculate badness of the monotonic function
+    double goodness = -badness(blv, monotonic_function);
+
+    return false;    
+}
+
+// Badness
+double badness(const BLV& blv, const MonotonicFunction& mf)
+{
+    // Unpack tuple
+    auto& bl = std::get<0>(blv);
+    auto& v  = std::get<1>(blv);
+
+    // Ideally, this transformation would make the sum rule applicable...
+    std::vector<double> m = mf.apply(v);
+
+    double result = 0.0;
+
+    // Loop over all pairs
+    for(size_t i=0; i<bl.size(); ++i)
+        for(size_t j=0; j<bl.size(); ++j)
+            if(bl.meet(i, j) == 0)           // If disjoint
+                result += std::abs(m[bl.join(i, j)] - (m[i] + m[j]));
+
+    return result;
 }
 
 // Output a boolean lattice with valuations.
